@@ -1,8 +1,10 @@
 package frontend;
+import database.*;
 
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Query q = new Query();
+		System.out.println(q.test());
 	}
 }
