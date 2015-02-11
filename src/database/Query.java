@@ -18,6 +18,7 @@ public class Query {
 		String[] x = null;
 		while (rs.next()) {
 			x[i] = rs.getString(column);
+			System.out.println(rs.getString(column));
 			i++;
 		}
 		return x;
@@ -31,7 +32,7 @@ public class Query {
 	 */
 	public boolean setArtikel(String table, String naam) throws SQLException {
 		Statement stmt = makeConnection();
-		stmt.executeUpdate("INSERT INTO " + table + " (naam) VALUES (" + naam + ");");
+		stmt.executeUpdate("INSERT INTO " + table + " VALUES('" + naam + "')");
 		return true;
 	}
 
