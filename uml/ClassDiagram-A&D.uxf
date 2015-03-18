@@ -5,28 +5,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>354</x>
-      <y>108</y>
-      <w>162</w>
-      <h>96</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Interface&gt;&gt;
-Package::Server
---
--hoeveelSchermen: int
---
-+Main(): void
-
-+startServerListener(port): boolean
-+startOrderScherm(adres): boolean
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>486</x>
-      <y>264</y>
+      <x>594</x>
+      <y>174</y>
       <w>186</w>
       <h>114</h>
     </coordinates>
@@ -46,8 +26,8 @@ inOp: String, inAllergie: String) void</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>510</x>
-      <y>456</y>
+      <x>618</x>
+      <y>366</y>
       <w>144</w>
       <h>132</h>
     </coordinates>
@@ -70,8 +50,8 @@ Oder(inID: int) void
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>372</y>
+      <x>678</x>
+      <y>282</y>
       <w>60</w>
       <h>96</h>
     </coordinates>
@@ -83,12 +63,12 @@ m1=0..n
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>186</x>
-      <y>264</y>
+      <x>294</x>
+      <y>174</y>
       <w>162</w>
       <h>102</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;AdminPanel&gt;&gt;
+    <panel_attributes>&lt;&lt;KokPaneel&gt;&gt;
 Package::Server
 --
 -outputDevice: Device
@@ -103,47 +83,20 @@ String)
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>510</x>
-      <y>174</y>
-      <w>132</w>
-      <h>102</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-m1=0..n
--bestellingen</panel_attributes>
-    <additional_attributes>110.0;150.0;110.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>252</x>
-      <y>168</y>
-      <w>114</w>
-      <h>108</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-m1=0..n
--adminPan</panel_attributes>
-    <additional_attributes>10.0;160.0;10.0;10.0;170.0;10.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>264</y>
+      <x>294</x>
+      <y>366</y>
       <w>162</w>
       <h>102</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Ober&gt;&gt;
 Package::Server
 --
--outputDevice: Device
--priv: Privilege
+-naam
+-functie
 --
-+AdminPanel(inDev: Device, inPriv: Privilege: 
-String)
++Ober(in_Naam: String, in_Funtie: String)
 
 +getDev(): Device
 +getPriv(): String
@@ -153,34 +106,21 @@ String)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>72</x>
-      <y>138</y>
-      <w>294</w>
-      <h>138</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-m1=0..n
--ober</panel_attributes>
-    <additional_attributes>10.0;210.0;10.0;10.0;470.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>252</x>
-      <y>360</y>
-      <w>270</w>
-      <h>162</h>
+      <x>450</x>
+      <y>216</y>
+      <w>156</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
 m1=0..n
 -gerechten</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;250.0;430.0;250.0</additional_attributes>
+    <additional_attributes>10.0;20.0;240.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>726</x>
-      <y>264</y>
+      <x>834</x>
+      <y>174</y>
       <w>186</w>
       <h>114</h>
     </coordinates>
@@ -198,23 +138,10 @@ inOp: String, inAllergie: String) void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>510</x>
-      <y>138</y>
-      <w>336</w>
-      <h>138</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-m1=0..n
--tafels</panel_attributes>
-    <additional_attributes>500.0;210.0;500.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>726</x>
-      <y>456</y>
+      <x>834</x>
+      <y>366</y>
       <w>186</w>
       <h>114</h>
     </coordinates>
@@ -234,8 +161,8 @@ inOp: String, inAllergie: String) void</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
-      <y>372</y>
+      <x>918</x>
+      <y>282</y>
       <w>72</w>
       <h>96</h>
     </coordinates>
