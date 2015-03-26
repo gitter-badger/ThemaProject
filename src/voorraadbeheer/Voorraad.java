@@ -17,12 +17,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
+@SuppressWarnings("serial")
 public class Voorraad implements Serializable{
 	private ArrayList<Product> alleProducten = new ArrayList<Product>();
 
 	public Voorraad() {
-		Product p = new Product(1, "ventiel", "onderdeel", 10, 20, 1.00);
-		alleProducten.add(p);
 	}
 
 	public void voegProductToe(Product nweP) {

@@ -1,5 +1,8 @@
 package voorraadbeheer;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -41,7 +44,7 @@ public class Main extends Application {
 		b4.setOnAction(e -> {
 			ProductenWeergeven voeg = new ProductenWeergeven(primaryStage, voorraad);
 		});
-		
+
 		paddingBox.getChildren().addAll(b, b2, b3, b4);
 		root.setPadding(new Insets(10, 25, 25, 25));
 		root.getChildren().addAll(paddingBox);
@@ -50,5 +53,17 @@ public class Main extends Application {
 		primaryStage.setTitle("SUPER APP!");
 		primaryStage.show();
 
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+			public void run() {
+				try {
+					voorraad.schrijfWeg();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}));
 	}
 }
