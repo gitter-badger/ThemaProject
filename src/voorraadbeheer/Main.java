@@ -50,7 +50,7 @@ public class Main extends Application {
 		root.getChildren().addAll(paddingBox);
 		scene.setRoot(root);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("SUPER APP!");
+		primaryStage.setTitle("Voorraadbeheer");
 		primaryStage.show();
 
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {

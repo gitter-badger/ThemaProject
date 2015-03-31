@@ -20,9 +20,7 @@ public class ProductVerwijderenFrame extends Stage {
 
 	public ProductVerwijderenFrame(Stage primaryStage, Voorraad voor) {
 		this.voorraad = voor;
-		Label l1 = new Label("Verwijder het contact");
-		Label l2 = new Label("Naam van de voorraad:");
-		Label voorraadd = new Label("de voorraad");
+		Label l1 = new Label("Verwijder de producten uit voorraad");
 		Label l3 = new Label("alle producten:");
 		
 		ComboBox cb1 = new ComboBox();
@@ -31,33 +29,24 @@ public class ProductVerwijderenFrame extends Stage {
 		
 
 		Button b1 = new Button();
-		b1.setText("reset");
+		b1.setText("Annulleer");
 		Button b2 = new Button();
 		b2.setText("verwijder");
 		FlowPane root = new FlowPane();
 		root.setVgap(8);
 		root.setHgap(4);
 		l1.setPrefWidth(350);
-		l2.setPrefWidth(200);
 		l3.setPrefWidth(100);
 		cb1.setPrefWidth(200);
 		empty.setPrefWidth(150);
 
 		root.setPadding(new Insets(5, 5, 5, 5));
-
-		root.getChildren().add(l1);
-		root.getChildren().add(l2);
-		root.getChildren().add(voorraadd);
-		root.getChildren().add(l3);
-		root.getChildren().add(cb1);
-		root.getChildren().add(empty);
-		root.getChildren().add(b1);
-		root.getChildren().add(b2);
-
+		root.getChildren().addAll(l1,l3,cb1,empty,b1,b2);
+		
 		Scene scene = new Scene(root, 350, 275);
 		b1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {				
-				cb1.getSelectionModel().clearSelection();
+				close();
 			}
 		});
 

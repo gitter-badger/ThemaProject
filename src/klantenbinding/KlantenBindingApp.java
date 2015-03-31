@@ -121,6 +121,8 @@ public class KlantenBindingApp extends Application implements EventHandler<Actio
                 System.out.println("Maak brief werkt niet");
             }
         }
-
     }
+    public static void main(String[] args) {
+		Application.launch(args);
+	}
 }

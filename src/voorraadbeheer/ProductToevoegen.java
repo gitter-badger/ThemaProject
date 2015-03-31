@@ -29,7 +29,7 @@ public class ProductToevoegen extends Stage {
 		initOwner(owner);
 		this.vrAad = voor;
 		FlowPane root = new FlowPane();
-		Scene scene = new Scene(root, 225, 330);
+		Scene scene = new Scene(root, 250, 400);
 	
 		artikelNummerL = new Label("Artikelnummer");
 		naamL = new Label("Naam");
