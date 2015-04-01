@@ -1,5 +1,6 @@
 package werkplaats;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -7,8 +8,7 @@ import java.util.Comparator;
 
 import werkplaats.Afspraak;
 
-public class Klant
-{
+public class Klant implements Serializable{
     private String voornaam;
     private String achternaam;
     private String straatnaam;
@@ -40,9 +40,9 @@ public class Klant
         return voornaam + " " + achternaam + "\n" + straatnaam + " " + huisnummer + "\n" + postcode + " " + plaatsnaam;
     }
 
-    public String getAuto()
+    public Auto getAuto()
     {
-        return deAuto.toString();
+        return deAuto;
     }
 
     public boolean onderhoud() //Hier wordt gekeken of er onderhoud nodig is

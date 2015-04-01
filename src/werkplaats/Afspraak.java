@@ -1,16 +1,18 @@
 package werkplaats;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Afspraak
-{
-    private String type;
+public class Afspraak implements Serializable{
+    private Type type;
     private Calendar datum;
+    private Klant klant;
 
-    public Afspraak(String type, Calendar datum)
+    public Afspraak(Type type, Calendar datum, Klant k1)
     {
         this.type = type;
         this.datum = datum;
+        this.klant = k1;
     }
 
     public Calendar getDatum()
@@ -32,12 +34,15 @@ public class Afspraak
 
     public int getDag()
     {
-        int dag = datum.get(Calendar.DAY_OF_MONTH);
-        return dag;
+        return datum.get(Calendar.DAY_OF_MONTH);
     }
 
-    public String getType()
+    public Type getType()
     {
         return type;
+    }
+    public String toString()
+    {
+        return klant.toString() + " \n" + type + " " + klant.getAuto().getKenteken();
     }
 }

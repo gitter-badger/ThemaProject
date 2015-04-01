@@ -1,7 +1,8 @@
 package werkplaats;
 
-public class Auto
-{
+import java.io.Serializable;
+
+public class Auto implements Serializable{
     private String kenteken;
     private String merk;
     private String type;
@@ -16,5 +17,8 @@ public class Auto
     public String toString()
     {
         return "auto: " + merk + " " + type + " met kenteken: " + kenteken;
+    }
+    public String getKenteken(){
+    	return kenteken;
     }
 }

@@ -97,9 +97,9 @@ public class Klant
 
     }
 
-    public void voegAfspraakToe(Afspraak a)
+    public void voegAfspraakToe(Afspraak as1)
     {
-        alleAfspraken.add(a);
+        alleAfspraken.add(as1);
     }
 
 
