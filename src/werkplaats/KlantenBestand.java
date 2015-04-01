@@ -1,4 +1,4 @@
-package klantenbinding;
+package werkplaats;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

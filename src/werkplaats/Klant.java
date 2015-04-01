@@ -1,4 +1,4 @@
-package klantenbinding;
+package werkplaats;
 
 import java.util.ArrayList;
 import java.util.Calendar;
