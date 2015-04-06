@@ -2,9 +2,7 @@ package werkplaats;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 
-import voorraadbeheer.Product;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,8 +15,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import klantenbinding.Klant;
-import klantenbinding.KlantenBestand;
 
 public class WerkPlaats extends Application {
 	private VBox maandag, dinsdag, woensdag, donderdag, vrijdag;
@@ -91,7 +87,13 @@ public class WerkPlaats extends Application {
 		
 		factuur = new Button("Maak Factuur");
 		factuur.setOnAction(e -> {
-			FactuurOpstellenFrame fr = new FactuurOpstellenFrame(primaryStage);
+			if (getSelectedListview().getSelectionModel().getSelectedItem() != null){
+				FactuurOpstellenFrame fr = new FactuurOpstellenFrame(primaryStage);
+				fr.setAfspraak(getSelectedListview().getSelectionModel().getSelectedItem());
+			}
+			else {
+				FactuurOpstellenFrame fr = new FactuurOpstellenFrame(primaryStage);
+			}
 		});
 
 		// VBox verdeling per dag

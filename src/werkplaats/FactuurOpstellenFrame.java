@@ -22,8 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class FactuurOpstellenFrame extends Stage implements
-		EventHandler<ActionEvent> {
+public class FactuurOpstellenFrame extends Stage implements EventHandler<ActionEvent> {
 	private Label klussenL = new Label("Selecteer klus:");
 	private Label monteursL = new Label("Selecteer monteur:");
 	private ComboBox monteurscb = new ComboBox();
@@ -42,7 +41,7 @@ public class FactuurOpstellenFrame extends Stage implements
 	private Button print = new Button("Print   ");
 	private Button annuleer = new Button("Annuleer");
 	private IntegerProperty index = new SimpleIntegerProperty();
-
+	private Afspraak gekozenAfspraak;
 	private double totaalprijs = 0.00;
 
 	private AutoTotaalDienst dienst = new AutoTotaalDienst();
@@ -51,10 +50,8 @@ public class FactuurOpstellenFrame extends Stage implements
 	private TableView monteurTV = new TableView();
 	private TableView onderdeelTV = new TableView();
 
-	private ObservableList<MonteurEntry> monteurdata = FXCollections
-			.observableArrayList();
-	private ObservableList<OnderdeelEntry> onderdeeldata = FXCollections
-			.observableArrayList();
+	private ObservableList<MonteurEntry> monteurdata = FXCollections.observableArrayList();
+	private ObservableList<OnderdeelEntry> onderdeeldata = FXCollections.observableArrayList();
 
 	public FactuurOpstellenFrame(Stage owner) {
 		initOwner(owner);
@@ -64,15 +61,9 @@ public class FactuurOpstellenFrame extends Stage implements
 		TableColumn aantaluurCol = new TableColumn("Uur");
 		TableColumn mkostenCol = new TableColumn("Kosten");
 
-		monteurCol
-				.setCellValueFactory(new PropertyValueFactory<MonteurEntry, String>(
-						"Monteur"));
-		aantaluurCol
-				.setCellValueFactory(new PropertyValueFactory<MonteurEntry, Double>(
-						"Uur"));
-		mkostenCol
-				.setCellValueFactory(new PropertyValueFactory<MonteurEntry, Double>(
-						"Kosten"));
+		monteurCol.setCellValueFactory(new PropertyValueFactory<MonteurEntry, String>("Monteur"));
+		aantaluurCol.setCellValueFactory(new PropertyValueFactory<MonteurEntry, Double>("Uur"));
+		mkostenCol.setCellValueFactory(new PropertyValueFactory<MonteurEntry, Double>("Kosten"));
 		monteurTV.setItems(monteurdata);
 
 		monteurTV.getColumns().addAll(monteurCol, aantaluurCol, mkostenCol);
@@ -81,43 +72,32 @@ public class FactuurOpstellenFrame extends Stage implements
 		TableColumn aantalCol = new TableColumn("Aantal");
 		TableColumn okostenCol = new TableColumn("Kosten");
 
-		onderdeelCol
-				.setCellValueFactory(new PropertyValueFactory<MonteurEntry, String>(
-						"Onderdeel"));
-		aantalCol
-				.setCellValueFactory(new PropertyValueFactory<MonteurEntry, Integer>(
-						"Aantal"));
-		okostenCol
-				.setCellValueFactory(new PropertyValueFactory<MonteurEntry, Double>(
-						"Kosten"));
+		onderdeelCol.setCellValueFactory(new PropertyValueFactory<MonteurEntry, String>("Onderdeel"));
+		aantalCol.setCellValueFactory(new PropertyValueFactory<MonteurEntry, Integer>("Aantal"));
+		okostenCol.setCellValueFactory(new PropertyValueFactory<MonteurEntry, Double>("Kosten"));
 		onderdeelTV.setItems(onderdeeldata);
 
 		onderdeelTV.getColumns().addAll(onderdeelCol, aantalCol, okostenCol);
 
 		VBox klussenbox = new VBox();
 		klussencb.setPrefWidth(200);
-		klussencb.getItems().addAll(
-				deAfspraak.geefAlleAfsprakenn().toArray(new Afspraak[0]));
+		klussencb.getItems().addAll(deAfspraak.geefAlleAfsprakenn().toArray(new Afspraak[0]));
 		monteurscb.setPrefWidth(200);
-		monteurscb.getItems().addAll(
-				deAfspraak.geefAlleMonteurs().toArray(new Monteur[0]));
+		monteurscb.getItems().addAll(deAfspraak.geefAlleMonteurs().toArray(new Monteur[0]));
 
 		Label klussenmelding = new Label("");
 		klussenmelding.setTextFill(Color.RED);
-		klussenbox.getChildren().addAll(klussenL, klussencb, monteursL,
-				monteurscb, aantaluren, aantalurenTF, toevoegenmonteur,
-				klussenmelding, monteurTV, verwijderen1);
+		klussenbox.getChildren().addAll(klussenL, klussencb, monteursL, monteurscb, aantaluren, aantalurenTF, toevoegenmonteur, klussenmelding,
+				monteurTV, verwijderen1);
 		klussenbox.setPadding(new Insets(10, 10, 10, 10));
 
 		VBox onderdelenbox = new VBox();
 		soortonderdeelcb.setPrefWidth(200);
-		soortonderdeelcb.getItems().addAll(
-				dienst.geefAlleProducten().toArray(new Product[0]));
+		soortonderdeelcb.getItems().addAll(dienst.geefAlleProducten().toArray(new Product[0]));
 		Label onderdeelmelding = new Label("");
 		onderdeelmelding.setTextFill(Color.RED);
 
-		onderdelenbox.getChildren().addAll(soortonderdeelL, soortonderdeelcb,
-				aantalonderdelenL, aantalonderdelenTF, toevoegenonderdeel,
+		onderdelenbox.getChildren().addAll(soortonderdeelL, soortonderdeelcb, aantalonderdelenL, aantalonderdelenTF, toevoegenonderdeel,
 				onderdeelmelding, onderdeelTV, verwijderen2);
 		onderdelenbox.setPadding(new Insets(10, 10, 10, 10));
 
@@ -145,16 +125,11 @@ public class FactuurOpstellenFrame extends Stage implements
 						if (m.equals(monteurscb.getValue())) {
 							MonteurEntry monteurentry = new MonteurEntry();
 							monteurentry.monteur.set(m.getNaam());
-							monteurentry.uur.set(Double
-									.parseDouble(aantalurenTF.getText()));
-							monteurentry.kosten.set(Double
-									.parseDouble(aantalurenTF.getText())
-									* m.getUurloon());
+							monteurentry.uur.set(Double.parseDouble(aantalurenTF.getText()));
+							monteurentry.kosten.set(Double.parseDouble(aantalurenTF.getText()) * m.getUurloon());
 							monteurscb.getSelectionModel().clearSelection();
-							totaalprijs = totaalprijs
-									+ monteurentry.getKosten();
-							totaalprijsL.setText("De Totaalprijs: "
-									+ totaalprijs);
+							totaalprijs = totaalprijs + monteurentry.getKosten();
+							totaalprijsL.setText("De Totaalprijs: " + totaalprijs);
 							monteurdata.add(monteurentry);
 						}
 					}
@@ -173,34 +148,21 @@ public class FactuurOpstellenFrame extends Stage implements
 					for (Product p : dienst.geefAlleProducten()) {
 						if (p.equals(soortonderdeelcb.getValue())) {
 							OnderdeelEntry onderdeelentry = new OnderdeelEntry();
-							if (Integer.parseInt(aantalonderdelenTF.getText()) < p
-									.getVoorraad()
-									&& Integer.parseInt(aantalonderdelenTF
-											.getText()) >= 0
-									&& aantalonderdelenTF.getText() != null) {
+							if (Integer.parseInt(aantalonderdelenTF.getText()) < p.getVoorraad()
+									&& Integer.parseInt(aantalonderdelenTF.getText()) >= 0 && aantalonderdelenTF.getText() != null) {
 								onderdeelentry.onderdeel.set(p.getNaam());
-								onderdeelentry.aantal.set(Integer
-										.parseInt(aantalonderdelenTF.getText()));
-								onderdeelentry.kosten.set((double) Integer
-										.parseInt(aantalonderdelenTF.getText())
-										* p.getPrijs());
-								p.setVoorraad(p.getVoorraad()
-										- Integer.valueOf(aantalonderdelenTF
-												.getText()));
-								soortonderdeelcb.getSelectionModel()
-										.clearSelection();
-								totaalprijs = totaalprijs
-										+ onderdeelentry.getKosten();
-								totaalprijsL.setText("De Totaalprijs: "
-										+ totaalprijs);
+								onderdeelentry.aantal.set(Integer.parseInt(aantalonderdelenTF.getText()));
+								onderdeelentry.kosten.set((double) Integer.parseInt(aantalonderdelenTF.getText()) * p.getPrijs());
+								p.setVoorraad(p.getVoorraad() - Integer.valueOf(aantalonderdelenTF.getText()));
+								soortonderdeelcb.getSelectionModel().clearSelection();
+								totaalprijs = totaalprijs + onderdeelentry.getKosten();
+								totaalprijsL.setText("De Totaalprijs: " + totaalprijs);
 								onderdeelmelding.setText("");
 								onderdeeldata.add(onderdeelentry);
 							}
 						} else {
-							onderdeelmelding
-									.setText("Zoveel onderdelen zitten er niet in de voorraad");
-							soortonderdeelcb.getSelectionModel()
-									.clearSelection();
+							onderdeelmelding.setText("Zoveel onderdelen zitten er niet in de voorraad");
+							soortonderdeelcb.getSelectionModel().clearSelection();
 						}
 					}
 				}
@@ -238,9 +200,7 @@ public class FactuurOpstellenFrame extends Stage implements
 			public void handle(ActionEvent e) {
 				for (Afspraak a : deAfspraak.geefAlleAfsprakenn()) {
 					if (klussencb.getValue() == a) {
-						System.out.println(a.getKlant()
-								+ "\n\nBeste meneer/mevrouw "
-								+ a.getKlant().getAchternaam()
+						System.out.println(a.getKlant() + "\n\nBeste meneer/mevrouw " + a.getKlant().getAchternaam()
 								+ ",\n\nDit is het factuur van de reparatie,\nGraag binnen 2 weken overmaken naar NL99INGB0001234567\n");
 
 						for (int i = 0; i < monteurdata.size(); i++) {
@@ -250,21 +210,17 @@ public class FactuurOpstellenFrame extends Stage implements
 						for (int i = 0; i < onderdeeldata.size(); i++) {
 							System.out.print((onderdeeldata.get(i)).toString());
 						}
-						System.out
-								.print("\nTotaalprijs: "
-										+ totaalprijs
-										+ " euro\n\nMet vriendelijke groet,\n\nHenk Paladijn");
+						System.out.print("\nTotaalprijs: " + totaalprijs + " euro\n\nMet vriendelijke groet,\n\nHenk Paladijn");
 
 					}
 				}
+				close();
 			}
 		});
 
 		annuleer.setOnAction(new EventHandler<ActionEvent>() {
-
 			public void handle(ActionEvent e) {
 				close();
-
 			}
 		});
 
@@ -274,6 +230,9 @@ public class FactuurOpstellenFrame extends Stage implements
 		setScene(scene);
 		show();
 
+	}
+	public void setAfspraak(Afspraak af){
+		gekozenAfspraak = af;
 	}
 
 	public void handle(ActionEvent event) {
