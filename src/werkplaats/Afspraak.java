@@ -1,5 +1,4 @@
 package werkplaats;
-
 import java.io.Serializable;
 import java.util.Calendar;
 
@@ -43,7 +42,16 @@ public class Afspraak implements Serializable{
     {
         return type;
     }
-    public String getLabelPrint(){
+    
+    public Klant getKlant() {
+		return klant;
+	}
+
+	public void setKlant(Klant klant) {
+		this.klant = klant;
+	}
+
+	public String getLabelPrint(){
     	return datum.get(Calendar.DAY_OF_MONTH) + "-" + datum.get(Calendar.MONTH);
     }
     public int getWeek(){

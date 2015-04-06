@@ -25,7 +25,7 @@ public class WerkPlaats extends Application {
 	private ListView<Afspraak> maandagL, dinsdagL, woensdagL, donderdagL, vrijdagL;
 	private HBox knoppen, weken;
 	private AfsprakenBestand bestand = new AfsprakenBestand();
-	private Button maak, verwijder, vorige, volgende;
+	private Button maak, verwijder, vorige, volgende, factuur;
 	private Label week;
 	private int curWeek = 1;
 
@@ -71,8 +71,16 @@ public class WerkPlaats extends Application {
 
 		knoppen = new HBox(5);
 		maak = new Button("Maak afspraak");
+		maak.setOnAction(e -> {
+			AfsprakenInplannen ai = new AfsprakenInplannen(primaryStage);
+		});
 		verwijder = new Button("Verwijder afspraak");
 		knoppen.getChildren().addAll(maak, verwijder);
+		
+		factuur = new Button("Maak Factuur");
+		factuur.setOnAction(e -> {
+			FactuurOpstellenFrame fr = new FactuurOpstellenFrame(primaryStage);
+		});
 
 		// VBox verdeling per dag
 		maandag = new VBox();
@@ -97,7 +105,8 @@ public class WerkPlaats extends Application {
 		GridPane.setConstraints(vrijdag, 5, 1);
 		GridPane.setConstraints(knoppen, 5, 2);
 		GridPane.setConstraints(weken, 1, 2);
-		root.getChildren().addAll(maandag, dinsdag, woensdag, donderdag, vrijdag, knoppen, weken);
+		GridPane.setConstraints(factuur, 4, 2);
+		root.getChildren().addAll(maandag, dinsdag, woensdag, donderdag, vrijdag, knoppen, weken, factuur);
 
 		root.setPadding(new Insets(10, 25, 25, 10));
 		scene.setRoot(root);

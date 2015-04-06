@@ -22,14 +22,20 @@ import java.util.Locale;
 public class AfsprakenBestand implements Serializable{
 	private ArrayList<Afspraak> alleAfspraken = new ArrayList<Afspraak>();
 	private Locale usersLocale = Locale.getDefault();
+	private ArrayList<Monteur> alleMonteurs = new ArrayList<Monteur>();
+	private ArrayList<Klant> alleKlanten = new ArrayList<Klant>();
 	
 	public AfsprakenBestand(){
         //lees();
      
         // Voorbeelden voor nu TODO: Standaard save maken
-		Monteur mon1 = new Monteur("Martijn");
-		Monteur mon2 = new Monteur("Harry");
-		Monteur mon3 = new Monteur("Cara");
+		Monteur mon1 = new Monteur("Martijn", "Boontjesland 82", 18.50);
+		Monteur mon2 = new Monteur("Harry", "Bariumlaan 91", 20.50);
+		Monteur mon3 = new Monteur("Cara","Flapstraat 132", 15.50);
+		alleMonteurs.add(mon1);
+		alleMonteurs.add(mon2);
+		alleMonteurs.add(mon3);
+
 		
         Auto a1 = new Auto("12-DG-GH", "Opel","Astra");
         Auto a2 = new Auto("53-LL-PO", "Fiat", "Panda");
@@ -40,6 +46,11 @@ public class AfsprakenBestand implements Serializable{
         Klant k2 = new Klant("Klaas", "Jansen", "Oosterweg", 56, "7567LK", "Leusden", a2);
         Klant k3 = new Klant("Greet", "van den Berg", "Klaverpad", 67, "5545DD", "Almere", a3);
         Klant k4 = new Klant("Maureen", "van der Ploeg", "Koolzaadlaan", 324, "6456CV", "Den Dolder", a4);
+        alleKlanten.add(k1);
+        alleKlanten.add(k2);
+        alleKlanten.add(k3);
+        alleKlanten.add(k4);
+
         
         Calendar c1 = Calendar.getInstance(usersLocale);
         c1.set(2014, 1, 1);
@@ -88,6 +99,18 @@ public class AfsprakenBestand implements Serializable{
         }
         return x;
     }
+	
+	public ArrayList<Afspraak> geefAlleAfsprakenn() {
+		return alleAfspraken;
+	}
+	
+	public ArrayList<Monteur> geefAlleMonteurs() {
+		return alleMonteurs;
+	}
+	
+	public ArrayList<Klant> geefAlleKlanten() {
+		return alleKlanten;
+	}
 	
 	public String toString()
     {
