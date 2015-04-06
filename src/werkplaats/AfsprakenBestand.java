@@ -124,6 +124,10 @@ public class AfsprakenBestand implements Serializable{
         return s;
     }
 	
+	public void verwijderAfspraak(Afspraak af){
+		alleAfspraken.remove(af);
+	}
+	
 	public void schrijfWeg() throws FileNotFoundException, IOException {
 		try (OutputStream file = new FileOutputStream(new File("afspraken.obj"));
 				OutputStream buffer = new BufferedOutputStream(file);

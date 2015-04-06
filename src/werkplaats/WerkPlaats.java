@@ -75,6 +75,18 @@ public class WerkPlaats extends Application {
 			AfsprakenInplannen ai = new AfsprakenInplannen(primaryStage);
 		});
 		verwijder = new Button("Verwijder afspraak");
+		verwijder.setOnAction(e -> {
+			ListView<Afspraak> listAf = getSelectedListview();
+			if (listAf.getSelectionModel().getSelectedItem() != null){
+				Afspraak af = (Afspraak)listAf.getSelectionModel().getSelectedItem();
+				bestand.verwijderAfspraak(af);
+				updateDagen(maandagL, 1);
+				updateDagen(dinsdagL, 2);
+				updateDagen(woensdagL, 3);
+				updateDagen(donderdagL, 4);
+				updateDagen(vrijdagL, 5);
+			}
+		});
 		knoppen.getChildren().addAll(maak, verwijder);
 		
 		factuur = new Button("Maak Factuur");
@@ -146,5 +158,23 @@ public class WerkPlaats extends Application {
 		//}
 		vb.getChildren().addAll(l, x);
 		return x;
+	}
+	public ListView<Afspraak> getSelectedListview(){
+		if (maandagL.getSelectionModel().getSelectedItem() != null){
+			return maandagL;
+		}
+		if (dinsdagL.getSelectionModel().getSelectedItem() != null){
+			return dinsdagL;
+		}
+		if (woensdagL.getSelectionModel().getSelectedItem() != null){
+			return woensdagL;
+		}
+		if (donderdagL.getSelectionModel().getSelectedItem() != null){
+			return donderdagL;
+		}
+		if (vrijdagL.getSelectionModel().getSelectedItem() != null){
+			return vrijdagL;
+		}
+		else return null;
 	}
 }
