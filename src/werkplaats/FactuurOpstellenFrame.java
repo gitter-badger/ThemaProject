@@ -44,7 +44,7 @@ public class FactuurOpstellenFrame extends Stage implements EventHandler<ActionE
 	private Afspraak gekozenAfspraak;
 	private double totaalprijs = 0.00;
 
-	private AutoTotaalDienst dienst = new AutoTotaalDienst();
+	private AfsprakenBestand dienst = new AfsprakenBestand();
 	private AfsprakenBestand deAfspraak = new AfsprakenBestand();
 
 	private TableView monteurTV = new TableView();
@@ -145,7 +145,7 @@ public class FactuurOpstellenFrame extends Stage implements EventHandler<ActionE
 					onderdeelmelding.setText("Voer het aantal onderdelen in");
 				}
 				if (!aantalonderdelenTF.getText().isEmpty()) {
-					for (Product p : dienst.geefAlleProducten()) {
+					for (voorraadbeheer.Product p : dienst.geefAlleProducten()) {
 						if (p.equals(soortonderdeelcb.getValue())) {
 							OnderdeelEntry onderdeelentry = new OnderdeelEntry();
 							if (Integer.parseInt(aantalonderdelenTF.getText()) < p.getVoorraad()

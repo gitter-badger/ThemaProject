@@ -28,7 +28,7 @@ public class AfsprakenInplannen extends Stage implements EventHandler<ActionEven
     private ListView<Monteur> monteurs = new ListView();
     private Button annuleren = new Button("Annuleren");
     private Button inplannen = new Button("Inplannen");
-    private AutoTotaalDienst atd = new AutoTotaalDienst();
+    private AfsprakenBestand atd = new AfsprakenBestand();
 
     public AfsprakenInplannen(Stage owner)
     {

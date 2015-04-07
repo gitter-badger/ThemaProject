@@ -18,16 +18,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import voorraadbeheer.Voorraad;
 
 public class AfsprakenBestand implements Serializable{
 	private ArrayList<Afspraak> alleAfspraken = new ArrayList<Afspraak>();
 	private Locale usersLocale = Locale.getDefault();
 	private ArrayList<Monteur> alleMonteurs = new ArrayList<Monteur>();
 	private ArrayList<Klant> alleKlanten = new ArrayList<Klant>();
+	private ArrayList<voorraadbeheer.Product> alleProducten;
 	
 	public AfsprakenBestand(){
         //lees();
-     
+		Voorraad voorraad = new Voorraad();
+		alleProducten = voorraad.geefAlleProducten();
+		
         // Voorbeelden voor nu TODO: Standaard save maken
 		Monteur mon1 = new Monteur("Martijn", "Boontjesland 82", 18.50);
 		Monteur mon2 = new Monteur("Harry", "Bariumlaan 91", 20.50);
@@ -110,6 +114,10 @@ public class AfsprakenBestand implements Serializable{
 	
 	public ArrayList<Klant> geefAlleKlanten() {
 		return alleKlanten;
+	}
+	
+	public ArrayList<voorraadbeheer.Product> geefAlleProducten() {
+		return alleProducten;
 	}
 	
 	public String toString()
