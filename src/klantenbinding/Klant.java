@@ -5,8 +5,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
-import werkplaats.Afspraak;
-
 public class Klant
 {
     private String voornaam;
