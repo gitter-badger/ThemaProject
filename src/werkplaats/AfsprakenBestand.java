@@ -30,8 +30,8 @@ public class AfsprakenBestand implements Serializable {
 	private ArrayList<voorraadbeheer.Product> alleProducten = voorraad.geefAlleProducten();
 
 	public AfsprakenBestand() {
-		// lees();
-
+		//lees();
+		
 		voorraad.lees();
 		// Voorbeelden voor nu TODO: Standaard save maken
 		Monteur mon1 = new Monteur("Martijn", "Boontjesland 82", 18.50);
@@ -138,6 +138,12 @@ public class AfsprakenBestand implements Serializable {
 		alleAfspraken.remove(af);
 	}
 
+	/**
+	 * Schrijft alleAfspraken object weg
+	 * 
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public void schrijfWeg() throws FileNotFoundException, IOException {
 		try (OutputStream file = new FileOutputStream(new File("afspraken.obj"));
 				OutputStream buffer = new BufferedOutputStream(file);
@@ -149,6 +155,12 @@ public class AfsprakenBestand implements Serializable {
 
 	}
 
+	/**
+	 * Haalt alleAfspraken object op en zet deze in local alleAfspraken
+	 * 
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public void lees() {
 		try (InputStream file = new FileInputStream("afspraken.obj");
 				InputStream buffer = new BufferedInputStream(file);
