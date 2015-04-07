@@ -30,6 +30,7 @@ public class AfsprakenBestand implements Serializable{
 	public AfsprakenBestand(){
         //lees();
 		Voorraad voorraad = new Voorraad();
+		voorraad.lees();
 		alleProducten = voorraad.geefAlleProducten();
 		
         // Voorbeelden voor nu TODO: Standaard save maken

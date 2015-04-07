@@ -21,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import voorraadbeheer.Product;
 
 public class FactuurOpstellenFrame extends Stage implements EventHandler<ActionEvent> {
 	private Label klussenL = new Label("Selecteer klus:");
