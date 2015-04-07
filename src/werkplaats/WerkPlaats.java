@@ -29,6 +29,9 @@ public class WerkPlaats extends Application {
 		Application.launch(args);
 	}
 
+	/**
+	 * Startpunt scene WerkPlaats. primaryStage wordt aan alle andere scenes meegegeven
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 
@@ -43,7 +46,8 @@ public class WerkPlaats extends Application {
 		vorige = new Button("<<");
 		volgende = new Button(">>");
 		weken.getChildren().addAll(week, vorige, volgende);
-
+		
+		//Actionlistener voor week kiezen
 		volgende.setOnAction(e -> {
 			curWeek++;
 			week.setText("Week: " + curWeek);
@@ -56,13 +60,13 @@ public class WerkPlaats extends Application {
 		vorige.setOnAction(e -> {
 			if (curWeek != 1) {
 				curWeek--;
+				week.setText("Week: " + curWeek);
+				updateDagen(maandagL, 1);
+				updateDagen(dinsdagL, 2);
+				updateDagen(woensdagL, 3);
+				updateDagen(donderdagL, 4);
+				updateDagen(vrijdagL, 5);
 			}
-			week.setText("Week: " + curWeek);
-			updateDagen(maandagL, 1);
-			updateDagen(dinsdagL, 2);
-			updateDagen(woensdagL, 3);
-			updateDagen(donderdagL, 4);
-			updateDagen(vrijdagL, 5);
 		});
 
 		knoppen = new HBox(5);
@@ -71,6 +75,7 @@ public class WerkPlaats extends Application {
 			AfsprakenInplannen ai = new AfsprakenInplannen(primaryStage);
 		});
 		verwijder = new Button("Verwijder afspraak");
+		//Verwijder actionlistener, haalt eerst actieve ListView op
 		verwijder.setOnAction(e -> {
 			ListView<Afspraak> listAf = getSelectedListview();
 			if (listAf.getSelectionModel().getSelectedItem() != null){
@@ -86,8 +91,9 @@ public class WerkPlaats extends Application {
 		knoppen.getChildren().addAll(maak, verwijder);
 		
 		factuur = new Button("Maak Factuur");
+		// Open factuur Scene
 		factuur.setOnAction(e -> {
-			if (getSelectedListview().getSelectionModel().getSelectedItem() != null){
+			if (getSelectedListview() != null){
 				FactuurOpstellenFrame fr = new FactuurOpstellenFrame(primaryStage);
 				fr.setAfspraak(getSelectedListview().getSelectionModel().getSelectedItem());
 			}
@@ -111,7 +117,8 @@ public class WerkPlaats extends Application {
 
 		vrijdag = new VBox();
 		vrijdagL = vulDag(vrijdag, "Vrijdag", 5);
-
+		
+		//Gridpane verdeeld de verschillende HBoxes dagen in een grid
 		GridPane.setConstraints(maandag, 1, 1);
 		GridPane.setConstraints(dinsdag, 2, 1);
 		GridPane.setConstraints(woensdag, 3, 1);
@@ -127,7 +134,8 @@ public class WerkPlaats extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Werkplaats");
 		primaryStage.show();
-
+		
+		// Sla gegevens automatisch op zodra het programma wordt afgesloten
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			public void run() {
 				try {
@@ -141,13 +149,28 @@ public class WerkPlaats extends Application {
 			}
 		}));
 	}
-
+	
+	/**
+	 * updateDagen() wordt gebruikt om de UI te updaten. Aangezien ListView hier bijna geen functies voor heeft
+	 * wordt de List geleegd en opnieuw gevuld met andere informatie. 
+	 * 
+	 * @param listF	De list die ingegeven moet worden
+	 * @param id	ID van de dag, maandag = 1
+	 */
 	public void updateDagen(ListView<Afspraak> listF, int id) {
 		listF.setItems(null);
 		ObservableList<Afspraak> itemsDup = FXCollections.observableArrayList(bestand.geefAlleAfspraken(id, curWeek));
 		listF.setItems(itemsDup);
 	}
 
+	/**
+	 * vulDag() wordt gebruikt om als eerste de dagen te vullen, ook zet vuldag een label in de betreffende VBox
+	 * 
+	 * @param vb 	VBox die gevuld moet worden
+	 * @param dag	Dag string die gebruikt wordt voor het label
+	 * @param id	ID van de dag, maandag = 1
+	 * @return ListView<Afspraak>
+	 */
 	public ListView<Afspraak> vulDag(VBox vb, String dag, int id) {
 		ListView<Afspraak> x = new ListView<Afspraak>();
 		x.getItems().addAll(bestand.geefAlleAfspraken(id, curWeek));
@@ -161,6 +184,12 @@ public class WerkPlaats extends Application {
 		vb.getChildren().addAll(l, x);
 		return x;
 	}
+	
+	/**
+	 * getSelected() gaat over alle VBoxes heen en controlleerd welke VBox geselecteerd is
+	 * 
+	 * @return	ListView<Afspraak>
+	 */
 	public ListView<Afspraak> getSelectedListview(){
 		if (maandagL.getSelectionModel().getSelectedItem() != null){
 			return maandagL;

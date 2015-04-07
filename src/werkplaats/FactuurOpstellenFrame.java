@@ -1,5 +1,6 @@
 package werkplaats;
 
+import voorraadbeheer.Product;
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -21,7 +22,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import voorraadbeheer.Product;
 
 public class FactuurOpstellenFrame extends Stage implements EventHandler<ActionEvent> {
 	private Label klussenL = new Label("Selecteer klus:");
@@ -45,7 +45,6 @@ public class FactuurOpstellenFrame extends Stage implements EventHandler<ActionE
 	private Afspraak gekozenAfspraak;
 	private double totaalprijs = 0.00;
 
-	private AfsprakenBestand dienst = new AfsprakenBestand();
 	private AfsprakenBestand deAfspraak = new AfsprakenBestand();
 
 	private TableView monteurTV = new TableView();
@@ -94,7 +93,7 @@ public class FactuurOpstellenFrame extends Stage implements EventHandler<ActionE
 
 		VBox onderdelenbox = new VBox();
 		soortonderdeelcb.setPrefWidth(200);
-		soortonderdeelcb.getItems().addAll(dienst.geefAlleProducten().toArray(new Product[0]));
+		soortonderdeelcb.getItems().addAll(deAfspraak.geefAlleProducten().toArray(new Product[0]));
 		Label onderdeelmelding = new Label("");
 		onderdeelmelding.setTextFill(Color.RED);
 
@@ -125,6 +124,7 @@ public class FactuurOpstellenFrame extends Stage implements EventHandler<ActionE
 
 						if (m.equals(monteurscb.getValue())) {
 							MonteurEntry monteurentry = new MonteurEntry();
+							if (Double.parseDouble(aantalurenTF.getText()) > 0) {
 							monteurentry.monteur.set(m.getNaam());
 							monteurentry.uur.set(Double.parseDouble(aantalurenTF.getText()));
 							monteurentry.kosten.set(Double.parseDouble(aantalurenTF.getText()) * m.getUurloon());
@@ -132,6 +132,12 @@ public class FactuurOpstellenFrame extends Stage implements EventHandler<ActionE
 							totaalprijs = totaalprijs + monteurentry.getKosten();
 							totaalprijsL.setText("De Totaalprijs: " + totaalprijs);
 							monteurdata.add(monteurentry);
+							
+							}
+							else {
+								klussenmelding.setText("Onjuist aantal uur");
+								
+							}
 						}
 					}
 				}
@@ -146,11 +152,11 @@ public class FactuurOpstellenFrame extends Stage implements EventHandler<ActionE
 					onderdeelmelding.setText("Voer het aantal onderdelen in");
 				}
 				if (!aantalonderdelenTF.getText().isEmpty()) {
-					for (voorraadbeheer.Product p : dienst.geefAlleProducten()) {
+					for (Product p : deAfspraak.geefAlleProducten()) {
 						if (p.equals(soortonderdeelcb.getValue())) {
 							OnderdeelEntry onderdeelentry = new OnderdeelEntry();
 							if (Integer.parseInt(aantalonderdelenTF.getText()) < p.getVoorraad()
-									&& Integer.parseInt(aantalonderdelenTF.getText()) >= 0 && aantalonderdelenTF.getText() != null) {
+									&& Integer.parseInt(aantalonderdelenTF.getText()) >= 0) {
 								onderdeelentry.onderdeel.set(p.getNaam());
 								onderdeelentry.aantal.set(Integer.parseInt(aantalonderdelenTF.getText()));
 								onderdeelentry.kosten.set((double) Integer.parseInt(aantalonderdelenTF.getText()) * p.getPrijs());
@@ -161,10 +167,11 @@ public class FactuurOpstellenFrame extends Stage implements EventHandler<ActionE
 								onderdeelmelding.setText("");
 								onderdeeldata.add(onderdeelentry);
 							}
-						} else {
-							onderdeelmelding.setText("Zoveel onderdelen zitten er niet in de voorraad");
-							soortonderdeelcb.getSelectionModel().clearSelection();
-						}
+							else {
+								onderdeelmelding.setText("Zoveel onderdelen zitten er niet in de voorraad");
+								soortonderdeelcb.getSelectionModel().clearSelection();
+							}
+						} 
 					}
 				}
 

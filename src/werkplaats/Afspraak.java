@@ -7,13 +7,29 @@ public class Afspraak implements Serializable{
     private Calendar datum;
     private Klant klant;
     private Monteur mon;
+    private Calendar beginTijd;
+    private Calendar eindTijd;
+    
 
-    public Afspraak(Type type, Calendar datum, Klant k1, Monteur mon)
+    /**
+     * Maakt een nieuwe afspraak. Let op: Voeg afspraak toe aan afsprakenbestand
+     * 
+     * @param type	Enum met ONDERHOUD of REPARATIE
+     * @param datum	Datum van afspraak
+     * @param beginTijd	Begin tijd afspraak
+     * @param eindTijd	Eind tijd afspraak
+     * @param afspraakBeschrijving	String met omschrijving afspraak
+     * @param k1	Klant verbonden aan afspraak
+     * @param mon	Monteur verbonden aan afspraak
+     */
+    public Afspraak(Type type, Calendar datum, Calendar beginTijd, Calendar eindTijd, Klant k1, Monteur mon)
     {
         this.type = type;
         this.datum = datum;
         this.klant = k1;
         this.mon = mon;
+        this.beginTijd = beginTijd;
+        this.eindTijd = eindTijd;
     }
 
     public Calendar getDatum()
@@ -51,6 +67,36 @@ public class Afspraak implements Serializable{
 		this.klant = klant;
 	}
 
+	public Calendar getBeginTijd()
+    {
+        return beginTijd;
+    }
+
+    public Calendar getEindTijd()
+    {
+        return eindTijd;
+    }
+
+    public int getBeginUren()
+    {
+        return beginTijd.get(Calendar.HOUR_OF_DAY);
+    }
+    
+    public int getEindUren()
+    {
+        return eindTijd.get(Calendar.HOUR_OF_DAY);
+    }
+
+    public int getBeginMinuten()
+    {
+        return beginTijd.get(Calendar.MINUTE);
+    }
+
+    public int getEindMinuten()
+    {
+        return eindTijd.get(Calendar.MINUTE);
+    }
+    
 	public String getLabelPrint(){
     	return datum.get(Calendar.DAY_OF_MONTH) + "-" + datum.get(Calendar.MONTH);
     }
